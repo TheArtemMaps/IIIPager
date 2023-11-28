@@ -155,20 +155,19 @@ void CHud2::DrawPager() {
 		CRGBA PAGER_COLOR(32, 162, 66, 205);
 		Sprites[0].Draw(CRect(SCREEN_SCALE_X(26.0f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(27.0f), SCREEN_SCALE_X(160.0f) + SCREEN_SCALE_X(26.0f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(80.0f) + SCREEN_SCALE_Y(27.0f)), CRGBA(255, 255, 255, 255));
 			CFont::SetBackground(false, false);
-			CFont::SetScale(0.84f * static_cast<float>(RsGlobal.maximumWidth) / 640.0f,
-				1.0f * static_cast<float>(RsGlobal.maximumHeight) / 448.0f);
+			CFont::SetScale(0.68f * static_cast<float>(RsGlobal.maximumWidth) / DEFAULT_SCREEN_WIDTH,
+				1.0f * static_cast<float>(RsGlobal.maximumHeight) / DEFAULT_SCREEN_HEIGHT);
 			CFont::SetColor(PAGER_COLOR);
 			CFont::m_bFontRightAlign = false;
 			CFont::SetBackground(false, false);
-
 			CFont::m_bFontCentreAlign = false;
 			CFont::SetWrapx(SCREEN_STRETCH_X(DEFAULT_SCREEN_WIDTH));
 			CFont::SetJustify(false);
 			//CFont::SetProportional(false);
-			CFont::SetProportional(true);
+			CFont::m_bFontPropOn = false;
 			CFont::SetDropShadowPosition(1);
 			CFont::SetDropColor(CRGBA(0, 0, 0, 255));
-			CFont::SetFontStyle(eFontStyle::FONT_MENU);
+			CFont::SetFontStyle(eFontStyle::FONT_PRICEDOWN);
 			CFont::PrintString(SCREEN_SCALE_X(52.0f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(54.0f), m_PagerMessage);
 		}
 	}
