@@ -102,21 +102,6 @@ void CHud2::SetPagerMessage(char* message)
 	m_PagerMessage[i] = 0;
 }
 
-void CHud2::DrawHUD() {
-	RwRenderStateSet(rwRENDERSTATETEXTUREFILTER, reinterpret_cast<void*>(rwFILTERLINEARMIPLINEAR));
-
-	RwRenderStateSet(rwRENDERSTATEZTESTENABLE, reinterpret_cast<void*>(0));
-	RwRenderStateSet(rwRENDERSTATEZWRITEENABLE, reinterpret_cast<void*>(0));
-	RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, reinterpret_cast<void*>(1));
-	RwRenderStateSet(rwRENDERSTATESRCBLEND, reinterpret_cast<void*>(5));
-	RwRenderStateSet(rwRENDERSTATEDESTBLEND, reinterpret_cast<void*>(6));
-	RwRenderStateSet(rwRENDERSTATEFOGENABLE, reinterpret_cast<void*>(0));
-	RwRenderStateSet(rwRENDERSTATECULLMODE, reinterpret_cast<void*>(1));
-
-	// Pager
-	DrawPager();
-}
-
 void CHud2::DrawPager() {
 	if (!m_PagerMessage[0] && PagerOn == 1) {
 		PagerSoundPlayed = false;
@@ -149,22 +134,23 @@ void CHud2::DrawPager() {
 				PagerOn = 0;
 			}
 		}
-		CRGBA PAGER_COLOR(32, 162, 66, 205);
+		//CRGBA* PAGER_COLOR(32, 162, 66, 205);
 		Sprites[0].Draw(CRect(SCREEN_SCALE_X(26.0f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(27.0f), SCREEN_SCALE_X(160.0f) + SCREEN_SCALE_X(26.0f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(80.0f) + SCREEN_SCALE_Y(27.0f)), CRGBA(255, 255, 255, 255));
 			CFont::SetBackground(false, false);
 			CFont::SetScale(0.68f * static_cast<float>(RsGlobal.maximumWidth) / DEFAULT_SCREEN_WIDTH,
 				1.0f * static_cast<float>(RsGlobal.maximumHeight) / DEFAULT_SCREEN_HEIGHT);
-			CFont::SetColor(PAGER_COLOR);
+			//CFont::SetColor(PAGER_COLOR);
+			*CFont::m_Color = CRGBA(32, 162, 66);
 			CFont::m_bFontRightAlign = false;
 			CFont::SetBackground(false, false);
 			CFont::m_bFontCentreAlign = false;
-			CFont::SetOrientation(ALIGN_LEFT);
 			CFont::SetWrapx(SCREEN_STRETCH_X(DEFAULT_SCREEN_WIDTH));
-			CFont::SetJustify(false);
-			//CFont::SetProportional(false);
-			CFont::m_bFontPropOn = false;
+			CFont::SetJustify(true);
+			CFont::SetOrientation(ALIGN_LEFT);
+			CFont::SetProportional(true);
+			//CFont::m_bFontPropOn = false;
 			CFont::SetDropShadowPosition(1);
-			CFont::SetDropColor(CRGBA(0, 0, 0, 255));
+			CFont::SetDropColor(CRGBA(0, 0, 0));
 			CFont::SetFontStyle(eFontStyle::FONT_PRICEDOWN);
 			CFont::PrintString(SCREEN_SCALE_X(52.0f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(54.0f), m_PagerMessage);
 		}
