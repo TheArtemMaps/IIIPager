@@ -1,0 +1,44 @@
+{$cleo}
+// Pager api by temka
+const
+    Pager = 0@
+    AddPagerMessage = 1@
+    AddPagerMessageWithNumber = 2@
+    ClearPagerMessages          = 3@
+    RestartCurrentPagerMessage      = 4@
+    AddPagerMessageFromGXTTable = 5@
+end
+
+if 0AA2: Pager = load_library "Pager.asi"
+then
+    0AA4: AddPagerMessage = get_proc_address "AddPagerMessage" library Pager
+    0AA4: AddPagerMessageWithNumber = get_proc_address "AddPagerMessageWithNumber" library Pager
+    0AA4: ClearPagerMessages = get_proc_address "ClearPagerMessages" library Pager
+    0AA4: RestartCurrentPagerMessage = get_proc_address "RestartCurrentPagerMessage" library Pager
+    0AA4: AddPagerMessageFromGXTTable = get_proc_address "AddPagerMessageFromGXTTable" library Pager
+    0AA3: free_library Pager
+end
+
+while true
+    wait 0
+    if 0ADC:   test_cheat "ADDMSG"
+    then
+    0AA6: call_method AddPagerMessage struct Pager num_params 4 pop 4 0 2 120 "Busta!"
+    end
+    if test_cheat "CLEARMSG"
+    then
+    0AA6: call_method ClearPagerMessages struct Pager num_params 0 pop 0
+    end
+    if test_cheat "NUMBA"
+    then
+    0AA6: call_method AddPagerMessageWithNumber struct Pager num_params 10 pop 10 0 3 100 6 5 4 3 2 1 "TEXT WITH NUMBERS"
+    end
+    if test_cheat "RESTART"
+    then
+    0AA6: call_method RestartCurrentPagerMessage struct Pager num_params 0 pop 0
+    end
+    if test_cheat "GXT"
+    then
+    0AA6: call_method AddPagerMessageFromGXTTable struct Pager num_params 4 pop 4 0 4 120 "USJ_ALL"
+    end
+end

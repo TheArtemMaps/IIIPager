@@ -1,0 +1,149 @@
+[RUS]
+Что бы отправить сообщение на пейджер игрока, используя CLEO, вставьте в свой скрипт следующее:
+
+// Pager api by temka
+const
+    Pager = 0@
+    AddPagerMessage = 1@
+    AddPagerMessageWithNumber = 2@
+    ClearPagerMessages          = 3@
+    RestartCurrentPagerMessage      = 4@
+    AddPagerMessageFromGXTTable = 5@
+end
+
+if 0AA2: Pager = load_library "Pager.asi"
+then
+    0AA4: AddPagerMessage = get_proc_address "AddPagerMessage" library Pager
+    0AA4: AddPagerMessageWithNumber = get_proc_address "AddPagerMessageWithNumber" library Pager
+    0AA4: ClearPagerMessages = get_proc_address "ClearPagerMessages" library Pager
+    0AA4: RestartCurrentPagerMessage = get_proc_address "RestartCurrentPagerMessage" library Pager
+    0AA4: AddPagerMessageFromGXTTable = get_proc_address "AddPagerMessageFromGXTTable" library Pager
+    0AA3: free_library Pager
+end
+// Тестовые читы (и примеры) (НЕ ОБЯЗАТЕЛЬНО ДЛЯ ВСТАВКИ, ЭТО В ЦЕЛЯХ ТЕСТИРОВАНИЯ) 
+while true
+    wait 0
+    if 0ADC:   test_cheat "ADDMSG"
+    then
+    // Параметры: Unused, priority, speed, text
+    0AA6: call_method AddPagerMessage struct Pager num_params 4 pop 4 0 2 120 "Busta!"
+    end
+    if test_cheat "CLEARMSG"
+    then
+    // Ноль параметров
+    0AA6: call_method ClearPagerMessages struct Pager num_params 0 pop 0
+    end
+    if test_cheat "NUMBA"
+    then
+    // Параметры: Unused, priority, speed, n6, n5, n4, n3, n2, n1, text
+    0AA6: call_method AddPagerMessageWithNumber struct Pager num_params 10 pop 10 0 3 100 6 5 4 3 2 1 "TEXT WITH NUMBERS"
+    end
+    if test_cheat "RESTART"
+    then
+    // Ноль параметров
+    0AA6: call_method RestartCurrentPagerMessage struct Pager num_params 0 pop 0
+    end
+    if test_cheat "GXT"
+    then
+	// Параметры: Unused, priority, speed, GXT Key
+    0AA6: call_method AddPagerMessageFromGXTTable struct Pager num_params 4 pop 4 0 4 120 "USJ_ALL"
+    end
+end
+
+Для вызова обычного сообщения:
+// Параметры: Unused, priority, speed, text
+Где 0 это неиспользованое, но обязательное, где 2 это приоритет, где 120 это скорость строки, и где "Busta!" это текст
+0AA6: call_method AddPagerMessage struct Pager num_params 4 pop 4 0 2 120 "Busta!"
+
+Для отправки сообщения используя GXT
+Где 0 это неиспользованое, но обязательное, где 2 это приоритет, где 120 это скорость строки, и где "USJ_ALL" это айди текста с GXT  
+// Параметры: Unused, priority, speed, GXT Key
+0AA6: call_method AddPagerMessageFromGXTTable struct Pager num_params 4 pop 4 0 4 120 "USJ_ALL"
+
+Для очистки сообщения (Убрать пейджер):
+// Ноль параметров
+0AA6: call_method ClearPagerMessages struct Pager num_params 0 pop 0
+
+Отправляет на пейджер игрока новое сообщение, в котором первый строковый токен~1~ заменяется указанным числом:
+// Параметры: Unused, priority, speed, n6, n5, n4, n3, n2, n1, text
+Где 0 это неиспользованое, но обязательное, где 3 это приоритет, где 100 это скорость прокрутки строки, числа с 6 по 1 это номера, и где "TEXT WITH NUMBERS" это текст. 
+0AA6: call_method AddPagerMessageWithNumber struct Pager num_params 10 pop 10 0 3 100 6 5 4 3 2 1 "TEXT WITH NUMBERS"
+
+Для повторения текущего сообщения:
+// Ноль параметров
+0AA6: call_method RestartCurrentPagerMessage struct Pager num_params 0 pop 0
+
+[ENG]
+To send a message to a player's pager using CLEO, insert the following text into your script:
+
+// Pager api by temka
+const
+    Pager = 0@
+    AddPagerMessage = 1@
+    AddPagerMessageWithNumber = 2@
+    ClearPagerMessages          = 3@
+    RestartCurrentPagerMessage      = 4@
+    AddPagerMessageFromGXTTable = 5@
+end
+
+if 0AA2: Pager = load_library "Pager.asi"
+then
+    0AA4: AddPagerMessage = get_proc_address "AddPagerMessage" library Pager
+    0AA4: AddPagerMessageWithNumber = get_proc_address "AddPagerMessageWithNumber" library Pager
+    0AA4: ClearPagerMessages = get_proc_address "ClearPagerMessages" library Pager
+    0AA4: RestartCurrentPagerMessage = get_proc_address "RestartCurrentPagerMessage" library Pager
+    0AA4: AddPagerMessageFromGXTTable = get_proc_address "AddPagerMessageFromGXTTable" library Pager
+    0AA3: free_library Pager
+end
+// Test cheats (and examples) (NOT NECESSARY FOR INSERTION, THIS IS FOR TESTING PURPOSES)
+while true
+     wait 0
+     if 0ADC: test_cheat "ADDMSG"
+     then
+     // Parameters: Unused, priority, speed, text
+     0AA6: call_method AddPagerMessage struct Pager num_params 4 pop 4 0 2 120 "Busta!"
+     end
+     if test_cheat "CLEARMSG"
+     then
+     // Zero parameters
+     0AA6: call_method ClearPagerMessages struct Pager num_params 0 pop 0
+     end
+     if test_cheat "NUMBA"
+     then
+     // Parameters: Unused, priority, speed, n6, n5, n4, n3, n2, n1, text
+     0AA6: call_method AddPagerMessageWithNumber struct Pager num_params 10 pop 10 0 3 100 6 5 4 3 2 1 "TEXT WITH NUMBERS"
+     end
+     if test_cheat "RESTART"
+     then
+     // Zero parameters
+     0AA6: call_method RestartCurrentPagerMessage struct Pager num_params 0 pop 0
+    end
+    if test_cheat "GXT"
+    then
+	// Parameters: Unused, priority, speed, GXT Key
+    0AA6: call_method AddPagerMessageFromGXTTable struct Pager num_params 4 pop 4 0 4 120 "USJ_ALL"
+    end
+end
+
+To send a regular message:
+// Parameters: Unused, priority, speed, text
+Where 0 is unused but required, where 2 is priority, where 120 is the line scrolling speed, and where "Busta!" this is the text
+0AA6: call_method AddPagerMessage struct Pager num_params 4 pop 4 0 2 120 "Busta!"
+
+To send a message using GXT key:
+// Parameters: Unused, priority, speed, GXT Key
+Where 0 is unused but required, where 3 is priority, where 100 is the line scrolling speed, numbers 6 to 1 are numbers, and where "USJ_ALL" is the GXT key.
+0AA6: call_method AddPagerMessageFromGXTTable struct Pager num_params 4 pop 4 0 4 120 "USJ_ALL"
+
+To clear a message (Remove pager):
+// Zero parameters
+0AA6: call_method ClearPagerMessages struct Pager num_params 0 pop 0
+
+Sends a new message in which the first string token~1~ is substituted with the specified number to the player's pager:
+// Parameters: Unused, priority, speed, n6, n5, n4, n3, n2, n1, text
+Where 0 is unused but required, where 3 is priority, where 100 is the line scrolling speed, numbers 6 to 1 are numbers, and where "TEXT WITH NUMBERS" is text.
+0AA6: call_method AddPagerMessageWithNumber struct Pager num_params 10 pop 10 0 3 100 6 5 4 3 2 1 "TEXT WITH NUMBERS"
+
+To restart the current message:
+// Zero parameters
+0AA6: call_method RestartCurrentPagerMessage struct Pager num_params 0 pop 0
