@@ -4,7 +4,7 @@
 #include "Hud.h"
 #include "MemoryMgr.h"
 #include "CText.h"
-#include "extensions/ScriptCommands.h"
+
 using namespace plugin;
 class IIIPager {
 public:
@@ -19,14 +19,33 @@ public:
          strncpy((char*)0x86A47C, "pager", 12);
          strncpy((char*)0x86A488, "barOutlineA", 16);
          strncpy((char*)0x86A498, "barOutline", 16);
+         //InjectHook(0x7193A0, &CFont2::SetScaleForCurrentLanguage, PATCH_JUMP);
+       //  Patch<void*>(0x71985E, CFont2::Sprite);
+       //  Patch<void*>(0x719B08, CFont2::Sprite);
+        // InjectHook(0x7192C0, &CFont2::FindSubFontCharacter, PATCH_JUMP);
+         //call(0x5BA6BD, &LoadFontsHack, PATCH_JUMP);
+         //call(0x7189B2, &ReleaseFontsHack, PATCH_JUMP);
+     //   patch::RedirectJump(0x719490, CFont2::SetFontStyle);
+     //   patch::RedirectJump(0x5BD76A, CFont2::Initialise);
+      //  patch::RedirectJump(0x53BBA7, CFont2::Shutdown);
+//patch::RedirectJump(0x71A700, CFont2::PrintString);
+       // patch::RedirectJump(0x719490, CFont2::SetFontStyle);
+       // patch::RedirectJump(0x7195B0, CFont2::SetProportional);
+       //  patch::RedirectJump(0x719600, CFont2::SetJustify);
+       //  patch::RedirectJump(0x7194D0, CFont2::SetWrapx);
+        // patch::RedirectJump(0x7195C0, CFont2::SetBackground);
+        // patch::RedirectJump(0x7187C0, CFont2::LoadFontValues);
+        // Nop(0x718B64, 6);
+         //call(0x7196DB, &CFont::FindSubFontCharacter, PATCH_NOTHING);
+         //call(0x719770, &CFont::FindSubFontCharacter, PATCH_NOTHING);
+         //call(0x7199C3, &CFont::FindSubFontCharacter, PATCH_NOTHING);
           VirtualProtect((char*)0x86A470, 0x18, dwProtect[0], &dwProtect[1]);
         };
         Events::reInitGameEvent += []() {
             CHud2::ReInitialise();
         };
         Events::drawHudEvent += []() {
-           // CHud2::DrawPager();
-            CHud2::DrawHUD();
+            CHud2::DrawPager();
             
         };
         plugin::Events::gameProcessEvent += []() {
